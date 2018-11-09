@@ -1,5 +1,4 @@
 #!/bin/bash
-
 aws rds describe-db-snapshots --profile stg > db_list
 while read LINE
 do
@@ -19,7 +18,8 @@ do
         then
             if [[ $SnapshotCreateTime -lt $oneMonthAgo ]]
             then
-                aws rds delete-db-snapshot --db-snapshot-identifier $DBSnapshotIdentifier --profile stg
+                echo "$DBSnapshotIdentifier is to be deleted"
+                #aws rds delete-db-snapshot --db-snapshot-identifier $DBSnapshotIdentifier --profile stg
             fi
         fi
     fi
